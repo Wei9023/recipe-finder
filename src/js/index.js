@@ -1,17 +1,32 @@
 //d2cd7cc4c6b0d4015b3dcd17615e410a
 //https://www.food2fork.com/api/search?key=YOUR_API_KEY&q=chicken%20breast&page=2
 
-import axios from 'axios';
+import Search from './modules/Search';
 
-async function getResults(query) {
-    const key = 'd2cd7cc4c6b0d4015b3dcd17615e410a';
-    try {
-        const res = await axios(`https://www.food2fork.com/api/search?key=${key}&q=${query}`);
-        const recipes = res.data.recipes;
-        console.log(recipes);
-    } catch (error){
-        alert(error);
+//global state  of the app
+
+const state = {}
+
+const constrolSearch = async () =>{
+    //1) get query from view
+    const query ='pizza' //TODO
+
+    if(query) {
+        // 2) new search object and add to state
+        state.search = new Search(query);
+        
+        // 3) Prepare UI for results
+
+        // 4) search for recipes
+        await state.search.getResults();
+
+        //5) render results on UI
+        console.log(state.search.result);
     }
 }
+document.querySelector('.search').addEventListener('submit', e =>{
+    e.preventDefault();
+    constrolSearch();
+})
 
-getResults('tomato pasta');
+// search.getResults();
