@@ -3,7 +3,7 @@
 
 import Search from './modules/Search';
 import * as searchView from './views/searchView';
-import { elements } from './views/base'
+import { elements, renderLoader, clearLoader } from './views/base'
 //global state  of the app
 
 const state = {}
@@ -21,11 +21,13 @@ const constrolSearch = async () =>{
         // 3) Prepare UI for results
         searchView.clearInput();
         searchView.clearResults();
+        renderLoader(elements.searchRes);
         // 4) search for recipes
         await state.search.getResults();
 
         //5) render results on UI
         // console.log(state.search.result);
+        clearLoader();
         searchView.renderResults(state.search.result);
     }
 }
