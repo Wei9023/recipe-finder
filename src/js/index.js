@@ -2,12 +2,14 @@
 //https://www.food2fork.com/api/search?key=YOUR_API_KEY&q=chicken%20breast&page=2
 
 import Search from './modules/Search';
+import Recipe from './modules/Recipe';
 import * as searchView from './views/searchView';
 import { elements, renderLoader, clearLoader } from './views/base'
 //global state  of the app
 
 const state = {}
 
+//seach controller
 const constrolSearch = async () =>{
     //1) get query from view
     const query = searchView.getInput(); //TODO
@@ -46,3 +48,9 @@ elements.searchResPages.addEventListener('click', e => {
     }
 } )
 // search.getResults();
+
+//recipe controller
+
+const r = new Recipe(46956);
+r.getRecipe();
+console.log(r);
